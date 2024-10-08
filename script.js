@@ -16,7 +16,9 @@ function updateCountdown() {
     document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
 }
 
+// Iniciar el conteo regresivo
 setInterval(updateCountdown, 1000);
+
 document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('audio');
     const volumeButton = document.getElementById('volume-on');
@@ -24,19 +26,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('modal');
     const yesButton = document.getElementById('yes-button');
     const noButton = document.getElementById('no-button');
+    const overlay = document.getElementById('overlay'); // Agregar el overlay
 
     // Muestra el modal al cargar la página
     modal.style.display = 'flex';
+    overlay.style.display = 'block'; // Muestra el overlay
 
     // Agrega eventos de clic a los botones del modal
     yesButton.addEventListener('click', function() {
         modal.style.display = 'none'; // Oculta el modal
+        overlay.style.display = 'none'; // Oculta el overlay
         audio.play(); // Reproduce el audio
         document.getElementById('volume-controls').style.display = 'flex'; // Muestra los controles de volumen
     });
 
     noButton.addEventListener('click', function() {
         modal.style.display = 'none'; // Oculta el modal
+        overlay.style.display = 'none'; // Oculta el overlay
         audio.pause(); // Asegura que el audio no se reproduzca
     });
 
@@ -76,4 +82,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
