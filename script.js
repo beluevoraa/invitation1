@@ -17,20 +17,63 @@ function updateCountdown() {
 }
 
 setInterval(updateCountdown, 1000);
+document.addEventListener('DOMContentLoaded', function () {
+    const audio = document.getElementById('audio');
+    const volumeButton = document.getElementById('volume-on');
+    const muteButton = document.getElementById('volume-off');
+    const modal = document.getElementById('modal');
+    const yesButton = document.getElementById('yes-button');
+    const noButton = document.getElementById('no-button');
 
-document.getElementById('attendanceForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita el envío normal del formulario
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    // Aquí puedes manejar el envío del formulario, por ejemplo, enviarlo a un servidor o mostrar un mensaje de éxito
-    console.log(`Nombre: ${name}, Correo: ${email}, Mensaje: ${message}`);
-    
-    // Cerrar el modal
-    const modal = bootstrap.Modal.getInstance(document.getElementById('attendanceModal'));
-    modal.hide();
-    
-    // Limpia el formulario
-    this.reset();
+    // Muestra el modal al cargar la página
+    modal.style.display = 'flex';
+
+    // Agrega eventos de clic a los botones del modal
+    yesButton.addEventListener('click', function() {
+        modal.style.display = 'none'; // Oculta el modal
+        audio.play(); // Reproduce el audio
+        document.getElementById('volume-controls').style.display = 'flex'; // Muestra los controles de volumen
+    });
+
+    noButton.addEventListener('click', function() {
+        modal.style.display = 'none'; // Oculta el modal
+        audio.pause(); // Asegura que el audio no se reproduzca
+    });
+
+    // Agrega un evento de clic al botón de volumen
+    volumeButton.addEventListener('click', function() {
+        audio.muted = true; // Mutea el audio
+        volumeButton.style.display = 'none'; // Oculta el botón de volumen
+        muteButton.style.display = 'block'; // Muestra el botón de volumen apagado
+    });
+
+    // Agrega un evento de clic al botón de mute
+    muteButton.addEventListener('click', function() {
+        audio.muted = false; // Desmutea el audio
+        muteButton.style.display = 'none'; // Oculta el botón de mute
+        volumeButton.style.display = 'block'; // Muestra el botón de volumen
+    });
+
+    // Control de pausa
+    audio.addEventListener('pause', function() {
+        if (audio.muted) {
+            muteButton.style.display = 'block'; // Muestra el botón de mute
+            volumeButton.style.display = 'none'; // Oculta el botón de volumen
+        } else {
+            volumeButton.style.display = 'none'; // Oculta el botón de volumen
+            muteButton.style.display = 'block'; // Muestra el botón de mute
+        }
+    });
+
+    // Control de play
+    audio.addEventListener('play', function() {
+        if (audio.muted) {
+            muteButton.style.display = 'block'; // Muestra el botón de mute
+            volumeButton.style.display = 'none'; // Oculta el botón de volumen
+        } else {
+            volumeButton.style.display = 'none'; // Oculta el botón de volumen
+            muteButton.style.display = 'block'; // Muestra el botón de mute
+        }
+    });
 });
+

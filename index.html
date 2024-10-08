@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     
@@ -58,10 +59,10 @@
 
     <div class="section" id="dress-code-regalos">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center"> <!-- Centrar las cards en la fila -->
                 <!-- Card Dress Code -->
-                <div class="col-12 col-md-6 mb-4 d-flex justify-content-center">
-                    <div class="card text-center" style="width: 18rem;">
+                <div class="col-12 col-md-6 d-flex justify-content-center mb-3"> <!-- Margen inferior para separación -->
+                    <div class="card text-center" style="width: 100%;"> <!-- Usar 100% para el ancho de la card -->
                         <img src="dresscode.jpeg" class="card-img-top" alt="Dress Code">
                         <div class="card-body">
                             <h5 class="card-title">Dress Code</h5>
@@ -71,8 +72,8 @@
                 </div>
     
                 <!-- Card Regalos -->
-                <div class="col-12 col-md-6 mb-4 d-flex justify-content-center">
-                    <div class="card text-center" style="width: 18rem;">
+                <div class="col-12 col-md-6 d-flex justify-content-center mb-3"> <!-- Margen inferior para separación -->
+                    <div class="card text-center" style="width: 100%;"> <!-- Usar 100% para el ancho de la card -->
                         <img src="ring.jpeg" class="card-img-top" alt="Regalos">
                         <div class="card-body">
                             <h5 class="card-title">Regalos</h5>
@@ -85,6 +86,9 @@
     </div>
     
     
+    
+    
+    
 
     <div class="section" id="confirmation-section">
         <div class="container text-center">
@@ -93,9 +97,41 @@
             <a href="https://forms.gle/1qccU6TmjxouvYCdA" target="_blank" class="btn">Confirmar Asistencia</a>
         </div>
     </div>
+
+    <audio id="audio" src="Ed Sheeran - Perfect.mp3" preload="auto"></audio>
     
+    <div id="modal">
+        <p>Esta invitación viene acompañada de música.
+        </p>
+        <p>¿Querés escuchar?</p>
+        <div class="button-container">
+            <button id="yes-button">Sí</button>
+            <button id="no-button">No</button>
+        </div>
+        <p class="p-modal">Siempre puedes pausar la música</p>
+    </div>
     
-    
+    <div id="volume-controls" style="display:none;">
+        <button id="volume-on" class="volume-button">
+            <!-- Icono de volumen -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-volume" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#435a7a" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 8a5 5 0 0 1 0 8" />
+                <path d="M17.7 5a9 9 0 0 1 0 14" />
+                <path d="M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" />
+            </svg>
+        </button>
+        <button id="volume-off" class="volume-button" style="display:none;">
+            <!-- Icono de volumen apagado -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-volume-off" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#435a7a" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 8a5 5 0 0 1 1.912 4.934m-1.377 2.602a5 5 0 0 1 -.535 .464" />
+                <path d="M17.7 5a9 9 0 0 1 2.362 11.086m-1.676 2.299a9 9 0 0 1 -.686 .615" />
+                <path d="M9.069 5.054l.431 -.554a.8 .8 0 0 1 1.5 .5v2m0 4v8a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l1.294 -1.664" />
+                <path d="M3 3l18 18" />
+            </svg>
+        </button>
+    </div>
     <footer class="footer">
         <div class="container text-center">
             <p class="footer-title">Bendita ♡ </p>
@@ -114,11 +150,7 @@
                         <path d="M16.5 7.5l0 .01" />
                       </svg>
                 </a>
-                <a href="https://www.twitter.com" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="60" height="60" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f6ebe0" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                      </svg>                </a>
+               
                             </div>
     </footer>
     
